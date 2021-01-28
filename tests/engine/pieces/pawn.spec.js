@@ -13,11 +13,11 @@ describe('Pawn', () => {
         
         it('can move one square up', () => {
             const pawn = new Pawn(Player.WHITE);
-            board.setPiece(Square.at(0, 0), pawn);
+            board.setPiece(Square.at(1, 0), pawn);
 
             const moves = pawn.getAvailableMoves(board);
 
-            moves.should.deep.include(Square.at(1, 0));
+            moves.should.deep.include(Square.at(2, 0));
         });
 
     });
@@ -26,11 +26,11 @@ describe('Pawn', () => {
         
         it('can move one square down', () => {
             const pawn = new Pawn(Player.BLACK);
-            board.setPiece(Square.at(7, 7), pawn);
+            board.setPiece(Square.at(6, 7), pawn);
 
             const moves = pawn.getAvailableMoves(board);
 
-            moves.should.deep.include(Square.at(6, 7));
+            moves.should.deep.include(Square.at(5, 7));
         });
 
     });
