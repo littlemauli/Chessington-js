@@ -1,4 +1,5 @@
 import Piece from './piece';
+import Square from '../square';
 
 export default class Knight extends Piece {
     constructor(player) {
@@ -12,26 +13,31 @@ export default class Knight extends Piece {
         // The Knight piece can skip over any other pieces to reach its destination position.
         let location = board.findPiece(this);
         let Array =[]
-         
-        function knightBaseMove (location){
-        Array.push(Square.at(location.row+2, location.col+1))
-        Array.push(Square.at(location.row-2, location.col-1))
-        Array.push(Square.at(location.row+1, location.col+2))
-        Array.push(Square.at(location.row+1, location.col-2))
-        Array.push(Square.at(location.row-1, location.col+2))
-        Array.push(Square.at(location.row-1, location.col-2))
-        Array.push(Square.at(location.row-2, location.col+1))
-        Array.push(Square.at(location.row-2, location.col-1))
+        let possibleLocations =[Square.at(location.row+1, location.col+2),
+                                Square.at(location.row+1, location.col-2),
+                                Square.at(location.row-1, location.col+2),
+                                Square.at(location.row-1, location.col-2),
+                                Square.at(location.row-2, location.col+1),
+                                Square.at(location.row-2, location.col-1),
+                                Square.at(location.row+2, location.col-1),
+                                Square.at(location.row+2, location.col+1)               
+                            ] 
+        for(let i=0; i<possibleLocations.length; i++)
+        {
+            if((squareIsValid(possibleLocations[i])) &&(!board.getPiece(possibleLocations[i])))
+            {
+                Array.push(possibleLocations[i])
+            }
         }
+
 
         function squareIsValid (element){
-            if(element.row<8 && element.col<8){
+            if(element.row<8 && element.col<8 && element.row>=0 && element.col>=0){
                 return element
-            }
-            
+            } 
         }
-    let finalArray = Array.filter(squareIsValid)
-
-    return finalArray
+//     let finalArray = Array.filter(squareIsValid)
+// console.log(finalArray)
+    return Array
     }
 }

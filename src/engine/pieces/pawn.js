@@ -17,22 +17,22 @@ export default class Pawn extends Piece {
         
         let location = board.findPiece(this);
 
-        if (this.player === Player.WHITE && this.numberOfMoves >= 1) {
+        if ((this.player === Player.WHITE && this.numberOfMoves >= 1)&&(!board.getPiece(Square.at(location.row +1, location.col)) ) ){
             
             return [Square.at(location.row + 1, location.col)]
-        } else if (this.player === Player.BLACK && this.numberOfMoves >= 1) {
+        } else if ((this.player === Player.BLACK && this.numberOfMoves >= 1)&&(!board.getPiece(Square.at(location.row -1, location.col)) )) {
            
             return [Square.at(location.row - 1, location.col)]
-        } else if (this.player === Player.WHITE && this.numberOfMoves === 0) {
+        } else if ((this.player === Player.WHITE && this.numberOfMoves === 0) &&(!board.getPiece(Square.at(location.row +1, location.col)))&&(!board.getPiece(Square.at(location.row +2, location.col)) ) ){
             
             return [Square.at(location.row + 1, location.col), Square.at(location.row + 2, location.col)]
 
-        } else if (this.player === Player.BLACK && this.numberOfMoves === 0) {
+        } else if ((this.player === Player.BLACK && this.numberOfMoves === 0) &&(!board.getPiece(Square.at(location.row -1, location.col)) )&&(!board.getPiece(Square.at(location.row -2, location.col)) )) {
             
             return [Square.at(location.row - 1, location.col), Square.at(location.row - 2, location.col)]
         }
 
 
-        //return new Array(0);
+        
     }
 }

@@ -3,6 +3,7 @@ import Pawn from '../../../src/engine/pieces/pawn';
 import Board from '../../../src/engine/board';
 import Player from '../../../src/engine/player';
 import Square from '../../../src/engine/square';
+import Bishop from '../../../src/engine/pieces/bishop';
 
 describe('Pawn', () => {
 
@@ -32,6 +33,19 @@ describe('Pawn', () => {
             moves.should.have.length(2);
             moves.should.deep.include.members([Square.at(2, 7), Square.at(3, 7)]);
         });
+
+        it('can only move if the field if free', ()=>{
+            const pawn = new Pawn(Player.WHITE);
+            const bishop = new Bishop(Player.WHITE);
+            board.setPiece(Square.at(3, 7), bishop);
+            board.setPiece(Square.at(1, 7), pawn)
+            board.setPiece(Square.at(2, 7), pawn)
+
+            const moves = pawn.getAvailableMoves(board);
+
+            moves.should.have.length(0);
+            moves.should.deep.include.members()
+        })
 
     });
 

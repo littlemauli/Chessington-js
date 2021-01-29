@@ -1,4 +1,5 @@
 import Piece from './piece';
+import Square from '../square';
 
 export default class Bishop extends Piece {
     constructor(player) {
@@ -15,14 +16,14 @@ export default class Bishop extends Piece {
        
 
             for (let i = 1; location.row +i <8; i++) {
-                if(!!(this.board[location.row + i][location.col+i]) ){
+                if(!board.getPiece(Square.at(location.row+i, location.col+i)) ){
                 Array.push(Square.at(location.row + i, location.col+i))
                 }else{
                     break
                 }
             }
-            for (let i = 1; location.row - i >=0; i--) {
-                if(!!(this.board[location.row - i][location.col-i]) ){
+            for (let i = 1; location.row - i >=0; i++) {
+                if(!board.getPiece(Square.at(location.row - i, location.col-i)) ){
                 Array.push(Square.at(location.row - i, location.col-i))
                 }else{
                     break
@@ -30,27 +31,29 @@ export default class Bishop extends Piece {
                 
             }
             for (let i = 1; location.col + i < 8; i++) {
-                if(!!(this.board[location.row+i][location.col-i]) ){
+                if(!board.getPiece(Square.at(location.row + i, location.col-i)) ){
                 Array.push(Square.at(location.row+i, location.col - i))
                 } else{
                     break
                 }
             }
-            for (let i = 1; location.col - i >= 0; i--) {
-                if(!!(this.board[location.row-1][location.col+i]) ){
+            for (let i = 1; location.col - i >= 0; i++) {
+                if(!board.getPiece(Square.at(location.row -i, location.col+i)) ){
                 Array.push(Square.at(location.row-1, location.col + i))
                 } else{
                     break
                 }
             }
             function squareIsValid (element){
-                if(element.row<8 && element.col<8){
+                if(element.row<8 && element.col<8 && element.row>=0 && element.col>=0){
                     return element
                 }
                 
             }
         const finalArray = Array.filter(squareIsValid)
-
+        
+        console.log(finalArray)
+    
                
         return finalArray;
     }
