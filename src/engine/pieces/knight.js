@@ -12,7 +12,7 @@ export default class Knight extends Piece {
         // The Knight piece can move to any position not already inhabited by another piece of the same color.
         // The Knight piece can skip over any other pieces to reach its destination position.
         let location = board.findPiece(this);
-        let Array =[]
+        let availableMoves =[]
         let possibleLocations =[Square.at(location.row+1, location.col+2),
                                 Square.at(location.row+1, location.col-2),
                                 Square.at(location.row-1, location.col+2),
@@ -22,22 +22,15 @@ export default class Knight extends Piece {
                                 Square.at(location.row+2, location.col-1),
                                 Square.at(location.row+2, location.col+1)               
                             ] 
-        for(let i=0; i<possibleLocations.length; i++)
+        let screenedPossibleLocation = possibleLocations.filter(board.squareIsValid)
+
+        for(let i=0; i<screenedPossibleLocation.length; i++)
         {
-            if((squareIsValid(possibleLocations[i])) &&(!board.getPiece(possibleLocations[i])))
-            {
-                Array.push(possibleLocations[i])
-            }
+            this.possibleSquaresInOneDirection(screenedPossibleLocation[i], availableMoves, board)
         }
 
+        let finalArray = availableMoves.filter(board.squareIsValid)
+        return finalArray
 
-        function squareIsValid (element){
-            if(element.row<8 && element.col<8 && element.row>=0 && element.col>=0){
-                return element
-            } 
-        }
-//     let finalArray = Array.filter(squareIsValid)
-// console.log(finalArray)
-    return Array
     }
 }

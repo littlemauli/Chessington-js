@@ -33,7 +33,7 @@ describe('Knight', () => {
 
         it('can not move on an occupied field', () => {
             const knight = new Knight(Player.WHITE);
-            const pawn = new Pawn(Player.BLACK);
+            const pawn = new Pawn(Player.WHITE);
             board.setPiece(Square.at(6, 2), knight);
             board.setPiece(Square.at(4,1),pawn);
             board.setPiece(Square.at(5,4),pawn);
@@ -41,6 +41,18 @@ describe('Knight', () => {
             const moves = knight.getAvailableMoves(board);
             moves.should.have.length(4);
             moves.should.deep.include(Square.at(7,0));
+        });
+
+        it('it can take an opponant', () => {
+            const knight = new Knight(Player.WHITE);
+            const pawn = new Pawn(Player.BLACK);
+            board.setPiece(Square.at(6, 2), knight);
+            board.setPiece(Square.at(4,1),pawn);
+            board.setPiece(Square.at(5,4),pawn);
+
+            const moves = knight.getAvailableMoves(board);
+            moves.should.have.length(6);
+            moves.should.deep.include(Square.at(7,0), Square.at(4,1));
         });
 
     });

@@ -11,24 +11,10 @@ export default class Rook extends Piece {
         super(player);
     }
 
-    // possibleSquaresInOneDirection(testSquare, availableMoves, board) {
-    //     let testSquareContent = board.getPiece(testSquare); // what is on the square
-    //     if (!testSquareContent) {
-    //         availableMoves.push(testSquare)
-    //     }
-    //     else {
-    //         if (this.player !== testSquareContent.player) {
-    //             availableMoves.push(testSquare)
-    //         }
-    //         return false
-    //     }
-    //     return true
-    // }
-
 
     getAvailableMoves(board) {
-        //moves forward /backwards/ left or right
-        // moves any number of squares in one direction, if field free
+        //moves forward /backwards/ left or right only
+        // moves any number of squares in one direction, if field free, stops if occupied]
         //if field occupied by opponant, can take it
 
         let location = board.findPiece(this);//returns on which square the rook is
