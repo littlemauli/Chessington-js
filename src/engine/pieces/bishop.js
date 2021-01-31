@@ -12,49 +12,35 @@ export default class Bishop extends Piece {
         // The bishop can take any other piece on the board that is within its bounds of movement.
 
         let location = board.findPiece(this);
-        let Array = []
+        let availableMoves = []
        
 
             for (let i = 1; location.row +i <8; i++) {
-                if(!board.getPiece(Square.at(location.row+i, location.col+i)) ){
-                Array.push(Square.at(location.row + i, location.col+i))
-                }else{
-                    break
-                }
+                 if(!this.possibleSquaresInOneDirection(Square.at(location.row+i, location.col+i), availableMoves, board)){
+                      break
+                 }
             }
+
             for (let i = 1; location.row - i >=0; i++) {
-                if(!board.getPiece(Square.at(location.row - i, location.col-i)) ){
-                Array.push(Square.at(location.row - i, location.col-i))
-                }else{
+                if(!this.possibleSquaresInOneDirection(Square.at(location.row-i, location.col-i), availableMoves, board)){
                     break
-                }
-                
-            }
+               }
+          }
+              
             for (let i = 1; location.col + i < 8; i++) {
-                if(!board.getPiece(Square.at(location.row + i, location.col-i)) ){
-                Array.push(Square.at(location.row+i, location.col - i))
-                } else{
+                if(!this.possibleSquaresInOneDirection(Square.at(location.row+i, location.col-i), availableMoves, board)){
                     break
-                }
-            }
+               }
+          }
+
             for (let i = 1; location.col - i >= 0; i++) {
-                if(!board.getPiece(Square.at(location.row -i, location.col+i)) ){
-                Array.push(Square.at(location.row-1, location.col + i))
-                } else{
+                if(!this.possibleSquaresInOneDirection(Square.at(location.row-i, location.col+i), availableMoves, board)){
                     break
-                }
-            }
-            function squareIsValid (element){
-                if(element.row<8 && element.col<8 && element.row>=0 && element.col>=0){
-                    return element
-                }
-                
-            }
-        const finalArray = Array.filter(squareIsValid)
-        
-        console.log(finalArray)
-    
+               }
+          }
                
-        return finalArray;
+            let finalArray = availableMoves.filter(board.squareIsValid)
+            console.log(finalArray)
+            return finalArray
     }
 }

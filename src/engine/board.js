@@ -6,6 +6,8 @@ export default class Board {
     constructor(currentPlayer) {
         this.currentPlayer = currentPlayer ? currentPlayer : Player.WHITE;
         this.board = this.createBoard();
+        this.numberOfWhitesOfBoard =[]
+        this.numberOfBlacksOfBoard =[]
     }
 
 
@@ -15,6 +17,12 @@ export default class Board {
             board[i] = new Array(GameSettings.BOARD_SIZE);
         }
         return board;
+    }
+
+    squareIsValid (element){
+        if(element.row<8 && element.col<8 && element.row>=0 && element.col>=0){
+            return element
+        } 
     }
 
     setPiece(square, piece) {

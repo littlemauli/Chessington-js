@@ -27,7 +27,7 @@ import Pawn from '../../../src/engine/pieces/pawn';
 
         it('can stop in the square before an occupied square',() =>{
             const rook = new Rook(Player.WHITE);
-            const pawn = new Pawn(Player.BLACK);
+            const pawn = new Pawn(Player.WHITE);
             board.setPiece(Square.at(4,4),rook );
             board.setPiece(Square.at(3,4),pawn);
             board.setPiece(Square.at(4,0),pawn);
@@ -38,10 +38,20 @@ import Pawn from '../../../src/engine/pieces/pawn';
 
         });
 
+        it('when rook white it can take a black piece',() =>{
+            const rook = new Rook(Player.WHITE);
+            const pawn = new Pawn(Player.BLACK);
+            board.setPiece(Square.at(4,4),rook );
+            board.setPiece(Square.at(5,4),pawn);
+            
+
+            const moves = rook.getAvailableMoves(board);
+            moves.should.have.length(12);
+            moves.should.deep.include(Square.at(5, 4));
+
+        });
+
       });
-
-     
-
 
     });
 

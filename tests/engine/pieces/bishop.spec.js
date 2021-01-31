@@ -24,7 +24,7 @@ describe('Bishop', () => {
 
         it('can only move diagonaly and stop before a piece', () => {
             const bishop = new Bishop(Player.WHITE);
-            const pawn = new Pawn(Player.BLACK);
+            const pawn = new Pawn(Player.WHITE);
             board.setPiece(Square.at(4, 4), bishop);
             board.setPiece(Square.at(1,1),pawn);
             board.setPiece(Square.at(3,5),pawn);
@@ -32,6 +32,19 @@ describe('Bishop', () => {
             const moves = bishop.getAvailableMoves(board);
             moves.should.have.length(8);
             moves.should.deep.include(Square.at(2, 2));
+        });
+
+        it('can only move diagonaly and stop before an own piece or take someone elses', () => {
+            const bishop = new Bishop(Player.WHITE);
+            const pawn = new Pawn(Player.BLACK);
+            const pawnWhite = new Pawn(Player.WHITE);
+            board.setPiece(Square.at(4, 4), bishop);
+            board.setPiece(Square.at(1,1),pawn);
+            board.setPiece(Square.at(3,5),pawnWhite);
+
+            const moves = bishop.getAvailableMoves(board);
+            moves.should.have.length(9);
+            moves.should.deep.include(Square.at(1, 1));
         });
 
     });
